@@ -1,0 +1,9 @@
+5.8 comes with new Postmark mail driver
+
+in you ENV add:
+MAIL_MAILER=smtp
+POSTMARK_TOKEN=token
+
+then:
+composer require wildbit/swiftmailer-postmark
+composer require guzzlehttp/guzzle
