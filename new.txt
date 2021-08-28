@@ -1,9 +1,8 @@
-5.8 comes with new Postmark mail driver
+v6
 
-in you ENV add:
-MAIL_MAILER=smtp
-POSTMARK_TOKEN=token
+The new error page
 
-then:
-composer require wildbit/swiftmailer-postmark
-composer require guzzlehttp/guzzle
+Stack trace
+Request: method, session, cookies
+App state: route and view info
+User info
