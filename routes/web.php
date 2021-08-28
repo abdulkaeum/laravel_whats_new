@@ -14,16 +14,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    //if you were to have a massive set of data  User::all() will crash
-    // this will run x many records query plus x many collections all at once
-    //$users = App\Models\User::all();
+    // addSelect = a sub query to get the most recent posts title for user 15 and 2
 
-    // lazy collection returns a generator
-    // reduces memory consumption so server can handle load
-    // not loading it all into memory
-    // no queries are run here
-    $users = App\Model\User::cursor();
+    $data = App\Models\User::addSelect(['my_new_key' => function($query){
+        $query->select('title')
+            ->from('posts')
+            ->whereColumn('user_id', 'users.id')
+            ->limit(1)
+            ->latest();
+    }])->find([15, 2]);
 
-    // no queries are run until you pull it out from the lazy collection returned as per below
-    dd($users->first()->name);
+    //  orderBy and orderByDesc
+
+    $data1 = App\Models\User::orderBy(function ($query){
+        $query->select('created_at')
+            ->from('posts')
+            ->latest()
+            ->whereColumn('posts.id', 'users.id')
+            ->limit(1);
+    })->find([15, 2]);
+
+    dd($data1);
 });
