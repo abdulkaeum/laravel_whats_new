@@ -57,3 +57,31 @@ Route::get('posts/{post:slug}', function (Post $post){
 Route::get('users/{user}/posts/{post:id}', function (User $user, Post $post){
     return $post;
 });
+
+Route::get('newHttpClientGet', function (){
+
+    $data = \Illuminate\Support\Facades\Http::get('https://reqres.in/api/users');
+
+    //dd(collect($data->json()['data']));
+
+    if($data->ok()) {
+        return collect($data->json()['data'])->map(fn($user) => $user['email']);
+    } else {
+        return $data->ok();
+    }
+});
+
+Route::get('newHttpClientPost', function (){
+    $post = \Illuminate\Support\Facades\Http::post('https://reqres.in/api/users', [
+        'name' => 'Neo',
+        'job' => 'The One'
+    ]);
+
+    //dd($post->status());
+
+    if($post->status() == 201){
+        return $post->json();
+    } else {
+        return $post->status();
+    }
+});
