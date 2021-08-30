@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,21 @@ Route::get('/', function () {
 
 Route::get('tools', function (){
     return view('tools');
+});
+
+Route::get('stringable', function (){
+    $string = 'hello world';
+
+    $data = Str::kebab($string);
+    $data = Str::after('hello ', $string);
+    $data = Str::plural($string);
+    $data = Str::replace(' ', '-', $string);
+    $data = Str::wordCount($string);
+    $data = Str::substr($string, 5);
+
+    $string = 'hello world';
+
+    $data = Str::of($string)->title()->start('My ')->slug('*');
+
+    return $data;
 });
