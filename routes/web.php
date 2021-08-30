@@ -101,3 +101,7 @@ Route::get('factoryRelationships', function (){
     $FivePostsWithOneUser = \App\Models\Posts::factory()->forUser()->count(3)->create();
     // one-to-one/belongs to : 3 posts for one user
 });
+
+Route::get('throttle', function (){
+    return 'some file download';
+})->middleware('throttle:downloads');
