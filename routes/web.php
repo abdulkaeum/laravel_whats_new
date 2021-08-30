@@ -38,3 +38,10 @@ Route::get('stringable', function (){
 
     return $data;
 });
+
+//Casting Eloquent Attributes to Value Objects
+// much like using Accessors & Mutators on a Model
+// but you now have a dedicated place to do the logic
+// You'd create a news class to cast the attribute to placing it within the $casts
+// then use that class to implement from CastsAttributes
+// and use the get() and set()
