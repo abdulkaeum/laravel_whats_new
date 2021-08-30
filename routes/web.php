@@ -93,3 +93,11 @@ Route::get('classFactories', function (){
     // v7
     //factory(\App\Models\User)->make();
 });
+
+Route::get('factoryRelationships', function (){
+    $userWithFivePosts = \App\Models\User::factory()->hasPosts(5)->create();
+    // one-to-many/has many : user has 5 posts
+
+    $FivePostsWithOneUser = \App\Models\Posts::factory()->forUser()->count(3)->create();
+    // one-to-one/belongs to : 3 posts for one user
+});
