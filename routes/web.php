@@ -45,3 +45,15 @@ Route::get('stringable', function (){
 // You'd create a news class to cast the attribute to placing it within the $casts
 // then use that class to implement from CastsAttributes
 // and use the get() and set()
+
+// track down a resource using a custom key i.e posts.slug instead of posts.id posts/1
+Route::get('posts/{post:slug}', function (Post $post){
+    return $post;
+});
+
+//Route Custom Keys With Scoping
+// track down the posts using relationships i.e get this users post
+// scope is used here users.post_id
+Route::get('users/{user}/posts/{post:id}', function (User $user, Post $post){
+    return $post;
+});
