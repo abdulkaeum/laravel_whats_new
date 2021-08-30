@@ -85,3 +85,11 @@ Route::get('newHttpClientPost', function (){
         return $post->status();
     }
 });
+
+Route::get('classFactories', function (){
+    $return = \App\Models\User::factory()->is_admin()->unverified()->make();
+    var_dump($return);
+
+    // v7
+    //factory(\App\Models\User)->make();
+});
